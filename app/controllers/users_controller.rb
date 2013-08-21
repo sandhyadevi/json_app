@@ -16,7 +16,7 @@ def new
     @user = User.find(params[:id])
 	respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
+      format.json { render json: @user.as_json(:only => ["id","username","name"]) }
     end
     end
 
@@ -27,7 +27,7 @@ def new
     @users = User.all
 	respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json { render json: @user}
     end
   end
 
