@@ -6,5 +6,43 @@
         <%= @user.name %>
       </h1>
     </section>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
   </aside>
+   <div class="span8">
+    <%= render 'addfriend_form' if signed_in? %>
+  
+  <div class="span8">
+    <% if @user.trips.any? %>
+      <h3>All Trips (<%= @user.trips.count %>)</h3>
+     
+     
+
+
+<ul class="trips">
+    <% @trips.each do |trip| %>
+    <tr><br>
+    <td><%= trip.trip_id %></td>
+    <td><%= trip.title %></td>
+    <td><%= @user.name %></td>
+    <td><%= trip.destination %></td>
+    <td><%= trip.start_date %></td>
+    <td><%= trip.end_date%></td>
+    <td><%= trip.destination_lat%></td>
+    <td><%= trip.destination_lng%></td>
+    <td><%= link_to "Invite!", invite_path, class: "btn btn-large btn-primary" %></td>
+    </br>
+    </tr>
+    
+     <% end %>
+</ul>
+
+     
+      
+    <% end %>
+  </div>
 </div>
+</div>
+ 
+ 

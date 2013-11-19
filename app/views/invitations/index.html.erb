@@ -1,0 +1,40 @@
+<% provide(:title, 'Invite') %>
+
+<h1>Invite</h1>
+  <div class="row">
+  	<div class="span6 offset3">
+    	<%= form_for(@invitation) do |f| %>
+
+    	
+
+      		<%= f.label :invited_id %>
+      		<%= f.text_field :invited_id %>
+      		
+      			<%= f.submit "Invite", class: "btn btn-large btn-primary" %>
+    	<% end %>
+    	
+    	
+    	
+    	 <div class="span8">
+    <% if @users.any? %>
+      <h3>All Users (<%= @user.count %>)</h3>
+     
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
+
+  </div>
+</div>
+
+  	
+
+      		
+      		
+
+      		
+
+      	

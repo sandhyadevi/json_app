@@ -1,12 +1,31 @@
 JsonApp::Application.routes.draw do
+  
+   resources :users do
+    member do
+      get :added, :friendss
+    end
+  end
+ 
+    
 
-
-    resources :users
+   
   resources :sessions, only: [:new, :create, :destroy]
+  resources :trips,    only: [:create, :destroy]
+  resources :tfriends, only: [:create, :destroy]
+  resources :invitations, only: [:new, :create, :destroy]
    root to: 'static_pages#home'
+  
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
+  match '/name', to: 'trips#show'
+  match '/tripform', to: 'trips#new' 
+   
   match '/signout', to: 'sessions#destroy', via: :delete
+  match '/invite', to: 'invitations#new'
+  
+  
+  
+  
 
 
   # The priority is based upon order of creation:

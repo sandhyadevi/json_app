@@ -2,11 +2,14 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  username   :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  username        :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  remember_token  :string(255)
+#  password_digest :string(255)
+#  admin           :boolean          default(FALSE)
 #
 
 require 'spec_helper'
@@ -27,6 +30,19 @@ describe User do
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:remember_token) }
 	it { should respond_to(:authenticate) }
+	it { should respond_to(:admin) }
+	 it { should respond_to(:trips) }
+	 it { should respond_to(:tfriends) }
+	 it { should respond_to(:friends_users) }
+	 it { should respond_to(:added?) }
+  it { should respond_to(:addfriend!) }
+  it { should respond_to(:unfriend!) }
+  it { should respond_to(:reverse_tfriends) }
+  it { should respond_to(:friendss) }
+   it { should respond_to(:invitations) }
+  it { should respond_to(:invite) }
+  it { should respond_to(:invited_id) }
+
 
 	it { should be_valid }
 
@@ -104,12 +120,63 @@ describe User do
 	end
 
 	describe "username with mixed cases" do
-		let ( :mixed_case_username ) { "hEllO@fat.com" }
-
+		
 		it " should be all lower case " do
 			@user.username = mixed_case_username
 			@user.save
 			@user.reload.username.should == mixed_case_username.downcase
 		end
 	end
+	describe "trip associations" do
+  
+    before { @user.save }
+    let!(:older_trip) do 
+      FactoryGirl.create(:trip, user: @user)
+    end
+    let!(:newer_trip) do
+      FactoryGirl.create(:trip, user: @user)
+
+    it "should have the right trips in the right order" do
+      @user.trips.should == [newer_trip, older_trip]
+    end
+  end
+  it "should destroy associated trips" do
+      trips = @user.trips.to_a
+      @user.destroy
+      expect(trips).not_to be_empty
+      trips.each do |trip|
+        expect(Trip.where(id: trip.id)).to be_empty
+      end
+    end
+end
+
+  describe "added" do
+    let(:other_user) { FactoryGirl.create(:user) }
+    before do
+      @user.save
+      @user.addfriend!(other_user)
+    end
+
+    it { should be_added(other_user) }
+    its(:friends_users) { should include(other_user) }
+  
+  describe "friends user" do
+      subject { other_user }
+      its(:friendss) { should include(@user) }
+    end
+  
+  describe "and unfriend" do
+      before { @user.unfriend!(other_user) }
+
+      it { should_not be_added(other_user) }
+      its(:friends_users) { should_not include(other_user) }
+    end
+  end
+  
+  
+   describe "when invited_id is not present" do
+    before { @user.invited_id = " "}
+    it { should_not be_valid }
+  end 
+  
 end

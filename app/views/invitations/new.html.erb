@@ -1,0 +1,49 @@
+<% provide(:title, 'Invite') %>
+
+<h1>Invite</h1>
+  <div class="row">
+  	<aside class="span4">
+  		 
+  	<div class="span6 offset3">
+  		<div class="input-small">
+    	<%= form_for(@invitation) do |f| %>
+
+    	
+
+      		<%= f.label :invited_id %>
+      		<%= f.text_field :invited_id %>
+      		
+      			<%= f.submit "Invite", class: "btn btn-large btn-primary" %>
+      			
+      			</aside>
+    	<% end %>
+    	
+    	</div>
+  	
+  	
+    	<div class="span8">
+    <h3>All Users (<%= @users.count %>)</h3>
+<ul class="users">
+	
+    <% @users.each do |user| %>
+   
+    <tr><br>
+    <td><%= user.name %></td>
+    </tr></br>
+  	
+  	
+  	<% end %>
+  	</ul>
+   </div>
+   </div>
+   </div>
+     
+     
+
+
+
+      		
+
+      		
+
+      	

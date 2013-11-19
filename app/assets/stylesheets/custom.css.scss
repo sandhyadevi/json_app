@@ -6,6 +6,7 @@
   -moz-box-sizing: border-box; 
   -webkit-box-sizing: border-box; 
   box-sizing: border-box;
+  size: 5px;
 }
 
 
@@ -50,7 +51,7 @@ textarea {
 .center h1 {
 
 	/*text has to be 10px away from the bottom*/
-  	margin-bottom: 10px;
+  	margin-bottom: 5px;
 }
 
 /* All this shit is for typography*/
@@ -152,7 +153,7 @@ aside {
     span {
       display: block;
       margin-bottom: 3px;
-      line-height: 1;
+      line-height: 0;
     }
     h1 {
       font-size: 1.4em;
@@ -161,6 +162,35 @@ aside {
       margin-bottom: 3px;
       margin-top: 0px;
     }
+  }
+}
+
+.stats {
+  overflow: auto;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $grayLighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
   }
 }
 
@@ -173,10 +203,15 @@ aside {
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
+  border-radius: 3px 3px 3px 3px;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+   height: 18px;
+  line-height: 18px;
+  margin-bottom: 9px;
+  padding: 4px;
+  margin-bottom: 5px;
   @include box_sizing;
+  size: 5;
 }
 
 input {
@@ -221,3 +256,54 @@ input {
     }
   }
 }
+  
+  /* trips index */
+
+.trips {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+
+}
+
+/* Trip form =========================================================================================== */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+/* Invite form =========================================================================================== */
+
+.input[class=input-large], textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  border-radius: 3px 3px 3px 3px;
+  width: 100%;
+   height: 18px;
+  line-height: 18px;
+  margin-bottom: 9px;
+  padding: 4px;
+  margin-bottom: 5px;
+  @include box_sizing;
+  size: 5;
+}
+
+input {
+  height: auto !important;
+}
+
+
