@@ -24,15 +24,16 @@
     	<div class="span8">
     <h3>All Users (<%= @users.count %>)</h3>
 <ul class="users">
-	
+	<div class="checkboxes">
     <% @users.each do |user| %>
-   
+    <%= check_box_tag "users[]", user.id %> 
+  
     <tr><br>
-    <td><%= user.name %></td>
+    <td><%= user.name %> </td>
     </tr></br>
   	
+  	 <% end %>
   	
-  	<% end %>
   	</ul>
    </div>
    </div>

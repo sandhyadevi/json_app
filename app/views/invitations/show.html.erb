@@ -19,23 +19,22 @@
   	
     	
     	<div class="span8">
-    
-      <h3>All Users (<%= @user.count %>)</h3>
-     
-
-   <ul class="users">
-  <%= render @users %>
-</ul>
-    <tr><br>
-    
-  <li><%= user.name %></li>
+    	<div class="span8">
+    <h3>All Users (<%= @users.count %>)</h3>
+<ul class="users">
+	
+    <% @users.each do |user| %>
    
+    <tr><br>
+    <td><%= user.name %></td>
+    </tr></br>
   	
-  	</div>
+  	
   	<% end %>
+  	</ul>
    </div>
-     
-     
+   </div>
+   </div>
 
 
 

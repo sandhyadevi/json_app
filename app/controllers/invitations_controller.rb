@@ -6,7 +6,7 @@ class InvitationsController < ApplicationController
 
   def new
     @invitation = Invitation.new
-     @users = User.paginate(page: params[:page])
+      @users = (current_user.blank? ? User.all : User.find(:all, :conditions => ["id != ?", current_user.id]))
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
